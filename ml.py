@@ -4,7 +4,7 @@ from ultralytics import YOLO
 
 
 class CntItem:
-    def __init__(self):
+    def __init__(self, ):
         self.cnt = 0
         self.sum = 0
         self.max = 0.0
@@ -21,7 +21,7 @@ class YoloModel:
             names = {0: '-', 1: 'Beton', 2: 'Derevo', 3: 'Grunt', 4: 'Kirpich'}
             counter = {0: CntItem(), 1: CntItem(), 2: CntItem(), 3: CntItem(), 4: CntItem()}
             trimmed_clip = super_video_format(file[1], file[0], 125, 145)
-            cnt = 'Grunt'
+            cnt = 'Derevo'
             for frame in trimmed_clip.iter_frames(10):
                 results = self.model(frame)
                 for r in results:
