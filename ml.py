@@ -4,10 +4,11 @@ from ultralytics import YOLO
 
 
 class CntItem:
-    def __init__(self, ):
+    def __init__(self):
         self.cnt = 0
         self.sum = 0
         self.max = 0.0
+        self.cnt45 = 0
 
 
 class YoloModel:
@@ -31,14 +32,21 @@ class YoloModel:
                         counter[ind].max = float(max(counter[ind].max, conf))
                         counter[ind].cnt += 1  # счетчик
                         counter[ind].sum += conf  # сумма вер.
+                        if conf > 0.45:
+                            counter[ind].cnt45 += 1
 
                 if cv.waitKey(1) & 0xFF == ord('q'):
                     break
 
             max_key = 0
             for i in range(len(list(counter))):
-                if counter[i].max > counter[max_key].max:
+                if counter[i].cnt45 > counter[max_key].cnt45:
                     max_key = i
+
+            if max_key == 0:
+                for i in range(len(list(counter))):
+                    if counter[i].max > counter[max_key].max:
+                        max_key = i
 
             if max_key == 0 or counter[max_key].cnt == 0:
                 ans = {
