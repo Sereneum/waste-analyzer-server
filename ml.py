@@ -21,6 +21,7 @@ class YoloModel:
             names = {0: '-', 1: 'Beton', 2: 'Derevo', 3: 'Grunt', 4: 'Kirpich'}
             counter = {0: CntItem(), 1: CntItem(), 2: CntItem(), 3: CntItem(), 4: CntItem()}
             trimmed_clip = super_video_format(file[1], file[0], 125, 145)
+            cnt = 'Grunt'
             for frame in trimmed_clip.iter_frames(10):
                 results = self.model(frame)
                 for r in results:
@@ -43,7 +44,7 @@ class YoloModel:
                 ans = {
                     "filename": file[1].filename,
                     "class_name": "не определен",
-                    "avg": 0
+                    "avg": cnt
                 }
             else:
                 ans = {
