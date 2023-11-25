@@ -25,11 +25,11 @@ class YoloModel:
                 results = self.model(frame)
                 for r in results:
                     for c in r.boxes:
-                        conf = c.conf.cpu().numpy()[0]  # вероятность
-                        ind = int(c.cls)  # класс
+                        conf = c.conf.cpu().numpy()[0]  
+                        ind = int(c.cls) 
                         counter[ind].max = float(max(counter[ind].max, conf))
-                        counter[ind].cnt += 1  # счетчик
-                        counter[ind].sum += conf  # сумма вер.
+                        counter[ind].cnt += 1  
+                        counter[ind].sum += conf  
 
                 if cv.waitKey(1) & 0xFF == ord('q'):
                     break
